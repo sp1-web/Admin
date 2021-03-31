@@ -7,47 +7,57 @@
       <div
           class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-96 sm:p-6">
         <form class="space-y-6">
-          <autocomplete class="z-50" :search="search"></autocomplete>
-          <!--          <div>-->
-          <!--            <label for="name" class="block text-sm font-medium text-gray-700">-->
-          <!--              Nom-->
-          <!--            </label>-->
-          <!--            <div class="mt-1">-->
-          <!--              <input id="name" name="name" type="text" required-->
-          <!--                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"-->
-          <!--                     v-model="name">-->
-          <!--            </div>-->
-          <!--          </div>-->
-          <!--          <div>-->
-          <!--            <label for="description" class="block text-sm font-medium text-gray-700">-->
-          <!--              Description-->
-          <!--            </label>-->
-          <!--            <div class="mt-1">-->
-          <!--              <input id="description" name="description" type="text" required-->
-          <!--                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"-->
-          <!--                     v-model="description">-->
-          <!--            </div>-->
-          <!--          </div>-->
-          <!--          <div>-->
-          <!--            <label for="image" class="block text-sm font-medium text-gray-700">-->
-          <!--              Image-->
-          <!--            </label>-->
-          <!--            <div class="mt-1">-->
-          <!--              <input id="image" name="image" type="text" required-->
-          <!--                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"-->
-          <!--                     v-model="image">-->
-          <!--            </div>-->
-          <!--          </div>-->
-          <!--          <div>-->
-          <!--            <label for="price" class="block text-sm font-medium text-gray-700">-->
-          <!--              Prix-->
-          <!--            </label>-->
-          <!--            <div class="mt-1">-->
-          <!--              <input id="price" name="price" type="number" required-->
-          <!--                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"-->
-          <!--                     v-model="price">-->
-          <!--            </div>-->
-          <!--          </div>-->
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">
+              Nom
+            </label>
+            <div class="mt-1">
+              <input id="name" name="name" type="text" required
+                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     v-model="name">
+            </div>
+          </div>
+          <div>
+            <label for="code" class="block text-sm font-medium text-gray-700 flex flex-row">
+              Code de la promotion <p class="text-gray-400 ml-2">(ex : 123ABC)</p>
+            </label>
+            <div class="mt-1">
+              <input id="code" name="code" type="text" required
+                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     v-model="code">
+            </div>
+          </div>
+          <div>
+            <label for="perscentageReduction" class="block text-sm font-medium text-gray-700 flex flex-row">
+              Pourcentage de la réduction <p class="text-gray-400 ml-2">(ex : 50%)</p>
+            </label>
+            <div class="mt-1">
+              <input id="perscentageReduction" name="perscentageReduction" type="number" required
+                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     v-model="percentageReduction">
+            </div>
+          </div>
+          <div>
+            <label for="expireAtDate" class="block text-sm font-medium text-gray-700">
+              Date d'expiration
+            </label>
+            <div class="mt-1 flex justify-center flex-row">
+              <input id="expireAtDate" name="expireAtDate" type="date" required
+                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     v-model="expireAtDate">
+              <input id="expireAtTime" name="expireAtTime" type="time" required
+                     class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                     v-model="expireAtTime">
+            </div>
+          </div>
+          <div>
+            <p class="mb-1">Choisissez un article :</p>
+            <autocomplete class="z-50" :search="searchArticle" :getResultValue="getValueArticle"></autocomplete>
+          </div>
+          <div>
+            <p class="mb-1">Choisissez un qrcode :</p>
+            <autocomplete class="z-50" :search="searchQRcode" :getResultValue="getValueQRCode"></autocomplete>
+          </div>
           <div>
             <button type="button"
                     @click="createPromotion"
@@ -64,22 +74,27 @@
 <script>
 import Navbar from "@/components/nav";
 import axios from "axios";
-import Vue from "vue";
-import router from "@/router";
 import {store} from "@/store/store";
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import '@trevoreyre/autocomplete-vue/dist/style.css'
+import Vue from "vue";
 
 export default {
   name: 'modalCreatePromotion',
   components: {Navbar, Autocomplete},
   data() {
     return {
-      name: '',
-      description: '',
-      image: '',
-      price: '',
-      articles: []
+      qrcode: '',
+      qrcodesNames: [],
+      qrcodes: [],
+      article: '',
+      articlesNames: [],
+      articles: [],
+      name:'',
+      code:'',
+      percentageReduction:'',
+      expireAtDate:'',
+      expireAtTime:''
     }
   },
   methods: {
@@ -90,30 +105,65 @@ export default {
       axios.get('http://localhost:3000/articles', {
         headers: {'X-JWT': `${store.state.token}`}
       }).then((res) => {
-        this.articles = [];
+        this.articlesNames = [];
+        this.articles = res.data.data;
         const datas = res.data.data;
         datas.map(data => {
-          this.articles.push(data.name);
+          this.articlesNames.push(data.name);
         })
       })
     },
-    search(input) {
+    getAllQRcodes() {
+      axios.get('http://localhost:3000/qrcodes', {
+        headers: {'X-JWT': `${store.state.token}`}
+      }).then((res) => {
+        this.qrcodesNames = [];
+        this.qrcodes = res.data.data;
+        const datas = res.data.data;
+        datas.map(data => {
+          this.qrcodesNames.push(data.name);
+        })
+      })
+    },
+    searchArticle(input) {
       if (input.length < 1) {
         return []
       }
-      return this.articles.filter(article => {
+      return this.articlesNames.filter(article => {
         return article.toLowerCase().startsWith(input.toLowerCase())
       })
     },
+    searchQRcode(input) {
+      if (input.length < 1) {
+        return []
+      }
+      return this.qrcodesNames.filter(qrcode => {
+        return qrcode.toLowerCase().startsWith(input.toLowerCase())
+      })
+    },
+    getValueQRCode(result) {
+      this.qrcode = result;
+      return result
+    },
+    getValueArticle(result) {
+      this.article = result;
+      return result
+    },
     createPromotion() {
-      // axios.post('http://localhost:3000/promotions', {
-      //   name: this.name,
-      //   description: this.description,
-      //   img: this.image,
-      //   price: this.price
-      // }, {
-      //   headers: {'X-JWT': `${store.state.token}`}
-      // }).then(() => {
+      const articleId = this.articles.find(article => article.name === this.article).id
+      const qrcodeId = this.qrcodes.find(qrcode => qrcode.name === this.qrcode).id
+      const expireAt = `${this.expireAtDate} ${this.expireAtTime}`
+      axios.post('http://localhost:3000/promotions', {
+        qrcode_id: qrcodeId,
+        article_id: articleId,
+        name: this.name,
+        code: this.code,
+        percentageReduction: this.percentageReduction,
+        generic: false,
+        expireAt: expireAt
+      }, {
+        headers: {'X-JWT': `${store.state.token}`}
+      }).then(() => {
       Vue.notify({
         group: 'foo',
         type: 'success',
@@ -121,22 +171,12 @@ export default {
       })
       this.$emit('createPromotion');
       this.$store.commit('setCloseModalCreatePromotion')
-      // })
+      })
     }
   },
   mounted() {
     this.getAllArticles()
+    this.getAllQRcodes()
   }
 }
 </script>
-
-<style>
-.autocomplete {
-  z-index: 100 !important;
-}
-
-.autocomplete-result-list {
-  white-space: nowrap !important;
-  z-index: 100 !important;
-}
-</style>
