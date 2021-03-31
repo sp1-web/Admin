@@ -28,6 +28,8 @@
 
 import moment from "moment";
 import axios from "axios";
+import Vue from "vue";
+import {store} from "@/store/store";
 
 export default {
   name: 'tr-table-article',
@@ -43,9 +45,14 @@ export default {
   methods:{
     deleteArticle(){
       axios.delete(`http://localhost:3000/articles/${this.article.id}`, {
-        headers: {'X-JWT': `${localStorage.getItem('token')}`}
-      }).then((res) => {
-        console.log(res)
+        headers: {'X-JWT': `${store.state.token}`}
+      }).then(() => {
+        Vue.notify({
+          group: 'foo',
+          type: 'success',
+          title: 'Article supprimé avec succès !',
+        })
+        this.$emit('deleteArticle')
       })
     }
   },

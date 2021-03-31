@@ -48,6 +48,7 @@
 
 import router from "@/router";
 import axios from "axios";
+import {store} from "@/store/store";
 
 export default {
   name: 'Login',
@@ -63,13 +64,16 @@ export default {
         email: this.email,
         password: btoa(this.password)
       }).then((res) => {
-        localStorage.setItem('token', res.data.data.jwt.token)
+
+
+        store.commit('setToken',{
+          token: res.data.data.jwt.token
+        })
+        store.commit('changeStatusLogin')
+        // localStorage.setItem('token', res.data.data.jwt.token)
         return router.replace("/liste-promotion");
       })
     }
-  },
-  mounted() {
-    localStorage.clear()
   }
 }
 </script>

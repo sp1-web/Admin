@@ -1,6 +1,10 @@
 <template>
   <div>
     <navbar is-liste-promotion="true"/>
+    <button type="button"
+            class="mt-5 ml-5 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <a href="/create-promotion">Ajouter une promotion</a>
+    </button>
     <div class="p-5 overflow-x-hidden">
       <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="flex flex-col">
@@ -43,6 +47,7 @@
 import TrTablePromotion from "@/components/trTablePromotion";
 import axios from "axios";
 import Navbar from "@/components/nav";
+import {store} from "@/store/store";
 
 export default {
   name: 'listePromotions',
@@ -55,7 +60,7 @@ export default {
   methods: {
     getAllPromotions() {
       axios.get('http://localhost:3000/promotions', {
-        headers: {'X-JWT': `${localStorage.getItem('token')}`}
+        headers: {'X-JWT': `${store.state.token}`}
       }).then((res) => {
         this.promotions = res.data.data
       })

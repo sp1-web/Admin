@@ -2,9 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import listPromotion from '../views/ListePromotions.vue'
 import listArticle from '../views/ListeArticle.vue'
-import createPromotion from '../views/CreatePromotions.vue'
-import createArticle from '../views/CreateArticle.vue'
 import Login from '../views/Login.vue'
+import {store} from "@/store/store";
 
 Vue.use(VueRouter)
 
@@ -12,28 +11,27 @@ const routes = [
   {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      needsAuth: false,
+    },
   },
   {
     path: '/liste-promotion',
     name: 'list-promotion',
-    component: listPromotion
-  },
-  {
-    path: '/create-promotion',
-    name: 'create-promotion',
-    component: createPromotion
+    component: listPromotion,
+    meta: {
+      needsAuth: true,
+    },
   },
   {
     path: '/liste-article',
     name: 'list-article',
-    component:listArticle
-  },
-  {
-    path: '/create-article',
-    name: 'create-article',
-    component: createArticle
-  },
+    component:listArticle,
+    meta: {
+      needsAuth: true,
+    },
+  }
   // {
   //   path: '/*',
   //   name: 'Login',
@@ -45,5 +43,15 @@ const router = new VueRouter({
   mode: "history",
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.needsAuth) {
+    if (!store.getters['getToken']) {
+
+      return router.replace("/");
+    }
+  }
+  next();
+});
 
 export default router
