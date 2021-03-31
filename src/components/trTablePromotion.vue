@@ -21,12 +21,10 @@
 
 
 <script>
-
 import moment from "moment";
 import axios from "axios";
 import Vue from "vue";
 import {store} from "@/store/store";
-
 export default {
   name: 'tr-table-promotion',
   props: {

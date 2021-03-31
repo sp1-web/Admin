@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
         state: {
             login: false,
             modalCreateArticle: false,
+            modalCreatePromotion: false,
             token: '',
         },
         plugins: [vuexLocalStorage.plugin],
@@ -29,6 +30,12 @@ export const store = new Vuex.Store({
             setCloseModalCreateArticle() {
                 this.state.modalCreateArticle = false;
             },
+            setOpenModalCreatePromotion() {
+                this.state.modalCreatePromotion = true;
+            },
+            setCloseModalCreatePromotion() {
+                this.state.modalCreatePromotion = false;
+            },
         },
         getters: {
             getStatusLogin: state => {
@@ -39,6 +46,9 @@ export const store = new Vuex.Store({
             },
             getStatusModalCreateArticle: state => {
                 return state.modalCreateArticle;
+            },
+            getStatusModalCreatePromotion: state => {
+                return state.modalCreatePromotion;
             }
         },
     })

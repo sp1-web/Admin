@@ -2,7 +2,7 @@
   <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
-           @click="hideModalCreateArticle"></div>
+           @click="hideModalCreatePromotion"></div>
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
       <div
           class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-96 sm:p-6">
@@ -49,9 +49,9 @@
           </div>
           <div>
             <button type="button"
-                    @click="createArticle"
+                    @click="createPromotion"
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Créer un article
+              Créer une promotion
             </button>
           </div>
         </form>
@@ -64,9 +64,10 @@
 import Navbar from "@/components/nav";
 import axios from "axios";
 import Vue from "vue";
+import router from "@/router";
 import {store} from "@/store/store";
 export default {
-  name: 'modalCreateArticle',
+  name: 'modalCreatePromotion',
   components: {Navbar},
   data() {
     return {
@@ -77,26 +78,26 @@ export default {
     }
   },
   methods: {
-    hideModalCreateArticle() {
-      this.$store.commit('setCloseModalCreateArticle')
+    hideModalCreatePromotion() {
+      this.$store.commit('setCloseModalCreatePromotion')
     },
-    createArticle() {
-      axios.post('http://localhost:3000/articles', {
-        name: this.name,
-        description: this.description,
-        img: this.image,
-        price: this.price
-      }, {
-        headers: {'X-JWT': `${store.state.token}`}
-      }).then(() => {
-        Vue.notify({
-          group: 'foo',
-          type: 'success',
-          title: 'Article créé avec succès ! 🤩'
-        })
-        this.$emit('createArticle');
-        this.$store.commit('setCloseModalCreateArticle')
+    createPromotion() {
+      // axios.post('http://localhost:3000/promotions', {
+      //   name: this.name,
+      //   description: this.description,
+      //   img: this.image,
+      //   price: this.price
+      // }, {
+      //   headers: {'X-JWT': `${store.state.token}`}
+      // }).then(() => {
+      Vue.notify({
+        group: 'foo',
+        type: 'success',
+        title: 'Promotion créée avec succès ! 🤩'
       })
+      this.$emit('createPromotion');
+      this.$store.commit('setCloseModalCreatePromotion')
+      // })
     }
   },
 }

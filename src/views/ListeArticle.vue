@@ -5,6 +5,9 @@
     <button type="button"
             @click="openModalCreateArticle"
             class="mt-5 ml-5 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
       Ajouter un article
     </button>
     <div class="p-5 overflow-x-hidden">
@@ -53,14 +56,11 @@
 </template>
 
 <script>
-
 import Navbar from "@/components/nav";
 import axios from "axios";
 import trTableArticle from "@/components/trTableArticle";
 import ModalCreateArticle from "@/components/modalCreateArticle";
 import {store} from "@/store/store";
-
-
 export default {
   name: 'listeArticle',
   components: {ModalCreateArticle, Navbar, trTableArticle},

@@ -54,7 +54,6 @@
         </div>
       </div>
     </div>
-
     <div class="sm:hidden" id="mobile-menu">
       <div class="pt-2 pb-3 space-y-1">
         <a href="#"
@@ -78,10 +77,8 @@
 </template>
 
 <script>
-
 import router from "@/router";
 import {store} from "@/store/store";
-
 export default {
   name: 'navbar',
   props: {
