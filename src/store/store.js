@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
         state: {
             login: false,
             modalCreateArticle: false,
+            modalCreateQRCodes: false,
             modalCreatePromotion: false,
             token: '',
         },
@@ -36,7 +37,12 @@ export const store = new Vuex.Store({
             setCloseModalCreatePromotion() {
                 this.state.modalCreatePromotion = false;
             },
-        },
+            setOpenModalCreateQRCodes() {
+                this.state.modalCreateQRCodes = true;
+            },
+            setCloseModalCreateQRCodes() {
+                this.state.modalCreateQRCodes = false;
+            },        },
         getters: {
             getStatusLogin: state => {
                 return state.login;
@@ -49,6 +55,9 @@ export const store = new Vuex.Store({
             },
             getStatusModalCreatePromotion: state => {
                 return state.modalCreatePromotion;
+            },
+            getStatusmodalCreateQRCodes: state => {
+                return state.modalCreateQRCodes;
             }
         },
     })

@@ -12,6 +12,10 @@
                :class="`${isListeArticle ? 'border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' } `">
               Liste des articles
             </a>
+            <a href="/liste-qrcodes"
+               :class="`${isListeQRCodes ? 'border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' } `">
+              Liste des QRCodes
+            </a>
           </div>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
@@ -85,7 +89,8 @@ export default {
     isListePromotion: false,
     isCreatePromotion: false,
     isListeArticle: false,
-    isCreateArticle: false
+    isCreateArticle: false,
+    isListeQRCodes: false
   },
   data() {
     return {
