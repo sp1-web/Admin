@@ -35,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr-table-promotion v-for="(promotion, i) in promotions" :id="i" :promotion="promotion"/>
+                <tr-table-promotion v-for="(promotion, i) in promotions" :id="i" :promotion="promotion" @deletePromotion="refreshPromotion"/>
                 </tbody>
               </table>
             </div>

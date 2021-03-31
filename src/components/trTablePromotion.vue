@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     deletePromotion() {
-      axios.delete(`http://localhost:3000/promotions/${this.article.id}`, {
+      axios.delete(`http://localhost:3000/promotions/${this.promotion.id}`, {
         headers: {'X-JWT': `${store.state.token}`}
       }).then(() => {
         Vue.notify({
@@ -47,9 +47,7 @@ export default {
           title: 'Promotion supprimée avec succès !',
           text: 'La page va être actualisée'
         })
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000)
+        this.$emit('deletePromotion')
       })
     }
   },
