@@ -40,7 +40,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr-table-article v-for="(article, i) in articles" :id="i" :article="article" @deleteArticle="refreshArticle"/>
+                <tr-table-article v-for="(article, i) in articles" :id="i" :article="article"
+                                  @deleteArticle="refreshArticle"/>
                 </tbody>
               </table>
             </div>
@@ -76,10 +77,10 @@ export default {
         this.articles = res.data.data
       })
     },
-    refreshArticle(){
+    refreshArticle() {
       this.getAllPromotions()
     },
-    openModalCreateArticle(){
+    openModalCreateArticle() {
       this.$store.commit('setOpenModalCreateArticle')
     }
   },

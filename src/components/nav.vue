@@ -80,14 +80,15 @@
 <script>
 
 import router from "@/router";
+import {store} from "@/store/store";
 
 export default {
   name: 'navbar',
   props: {
-    isListePromotion:false,
-    isCreatePromotion:false,
-    isListeArticle:false,
-    isCreateArticle:false
+    isListePromotion: false,
+    isCreatePromotion: false,
+    isListeArticle: false,
+    isCreateArticle: false
   },
   data() {
     return {
@@ -96,6 +97,9 @@ export default {
   },
   methods: {
     logout() {
+      store.commit('setToken',{
+        token: ''
+      })
       router.replace("/");
     },
     changeStatusProfileDropdown() {

@@ -64,9 +64,7 @@ export default {
         email: this.email,
         password: btoa(this.password)
       }).then((res) => {
-
-
-        store.commit('setToken',{
+        store.commit('setToken', {
           token: res.data.data.jwt.token
         })
         store.commit('changeStatusLogin')
